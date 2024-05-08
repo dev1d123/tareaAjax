@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: skyblue;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "Jaro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3.5rem;
+}
+
+.info{
+    font-family: "Jaro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.graph-container{
+    display: grid;
+    grid-template-columns: auto auto;   
+}
+.gr{
+    margin: auto;
+}
+
+.select-option{
+    padding-top: 20rem;
+}
+select{
+    font-size: 2rem;
+    border-radius: 1.5rem;
+}
+.res{
+    
+}
