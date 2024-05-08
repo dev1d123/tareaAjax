@@ -1,0 +1,5 @@
+Tarea con solicitudes ajax.
+La base de datos representa a las estadisticas de casos confirmados de una enfermedad en cada region del peru, segun las fechas.
+
+Problema 1 -> Realizar graficos comparativos entre las regiones elegidas por el usuario
+Problema 2 -> Visualice un gráfico comparativo del crecimiento en regiones excepto Lima y Callao, mostrando el número de confirmados por cada día.
