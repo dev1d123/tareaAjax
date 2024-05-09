@@ -41,3 +41,23 @@ function showDep(data){
     });
 }
 window.onload = loadDep; //llamar a la funcion para cargar los departamenos cuando la pagina termine de cargarse
+
+
+//funcion para verificar que los dos cuadros esten llenos!!!
+function callGraphic(){
+    console.log("Valores de los selectores");
+    var show = true;
+    departamentoSeleccion.forEach(function(selectElement){
+        console.log(selectElement.value);
+        if(selectElement.value == "no-value"){
+            show = false;
+        }
+    })
+    if(show){
+        console.log("TODO OK -> Imprimiendo graficos");
+
+    }else{
+        console.log("Faltan valores!!!");
+    }
+}
+
