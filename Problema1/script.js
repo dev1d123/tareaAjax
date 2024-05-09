@@ -9,3 +9,8 @@ departamentoSeleccion.forEach(function(selectElement) {
     nuevaOpcion.value = 'nuevo-departamento';
     selectElement.appendChild(nuevaOpcion);
 });
+
+function loadDep(){
+    console.log("Implementacion de la funcion para cargar departamentos")
+}
+window.onload = loadDep; //llamar a la funcion para cargar los departamenos cuando la pagina termine de cargarse
