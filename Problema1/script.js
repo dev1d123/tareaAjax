@@ -68,7 +68,7 @@ function showGraphics(){
     departamentoSeleccion.forEach(function(selectElement){
         console.log("Mostrando grafico ", count);
         var dep = selectElement.value;
-        getConfirmed(dep);
+        getConfirmed(dep, count);
         console.log(selectElement.value);
 
         count++;
@@ -76,7 +76,7 @@ function showGraphics(){
     })
 }
 
-function getConfirmed(dep){
+function getConfirmed(dep, count){
     const xhttp = new XMLHttpRequest(); 
     xhttp.open("GET", "../data.json", true); 
     xhttp.send(); 
@@ -85,21 +85,70 @@ function getConfirmed(dep){
         if(this.readyState == 4 && this.status == 200){ 
             console.log("Exito!!!");
             let datos = JSON.parse(this.responseText);
-            var confirmados = getDatos(datos, dep)
+            var confirmados = getDatos(datos, dep, count)
             console.log("Los confirmados son: ", confirmados);
+            createGraphic(confirmados, "waos", count);
+
         }
     }
 
 }
-function getDatos(datos, dep) {
+function getDatos(datos, dep, count) {
     let resultado = null; 
-    
     datos.forEach(element => {
         if (element.region === dep) {
-            console.log("Comparando: ", element.region, " y ", dep);
+            console.log("Comparando: ", element.region, " y ", dep, "El count vale: ", count);
             resultado = element.confirmed;
         }
     });
     
     return resultado;
+}
+
+function createGraphic(data, dep, count) {
+    let ctx;
+    let canvasId;
+
+    // Determinar el ID del canvas según el conteo
+    if (count === 1) {
+        canvasId = 'g1';
+    } else {
+        canvasId = 'g2';
+    }
+
+    // Obtener el contexto del canvas
+    ctx = document.getElementById(canvasId).getContext('2d');
+
+    // Verificar si ya existe un gráfico en el lienzo y destruirlo si es necesario
+    if (window.myCharts && window.myCharts[canvasId]) {
+        window.myCharts[canvasId].destroy();
+    }
+
+    const fechas = data.map(entry => entry.date);
+    const valores = data.map(entry => entry.value);
+
+    // Crear el gráfico
+    window.myCharts = window.myCharts || {}; // Objeto global para almacenar los gráficos
+    window.myCharts[canvasId] = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: 'Casos confirmados',
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 }
