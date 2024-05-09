@@ -67,9 +67,39 @@ function showGraphics(){
     var count = 1;
     departamentoSeleccion.forEach(function(selectElement){
         console.log("Mostrando grafico ", count);
+        var dep = selectElement.value;
+        getConfirmed(dep);
         console.log(selectElement.value);
 
         count++;
         
     })
+}
+
+function getConfirmed(dep){
+    const xhttp = new XMLHttpRequest(); 
+    xhttp.open("GET", "../data.json", true); 
+    xhttp.send(); 
+
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){ 
+            console.log("Exito!!!");
+            let datos = JSON.parse(this.responseText);
+            var confirmados = getDatos(datos, dep)
+            console.log("Los confirmados son: ", confirmados);
+        }
+    }
+
+}
+function getDatos(datos, dep) {
+    let resultado = null; 
+    
+    datos.forEach(element => {
+        if (element.region === dep) {
+            console.log("Comparando: ", element.region, " y ", dep);
+            resultado = element.confirmed;
+        }
+    });
+    
+    return resultado;
 }
