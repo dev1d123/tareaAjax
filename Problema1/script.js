@@ -55,9 +55,21 @@ function callGraphic(){
     })
     if(show){
         console.log("TODO OK -> Imprimiendo graficos");
-
+        console.log("llamando a show!");
+        showGraphics();
     }else{
         console.log("Faltan valores!!!");
     }
 }
 
+function showGraphics(){
+    console.log("Valores de los selectores");
+    var count = 1;
+    departamentoSeleccion.forEach(function(selectElement){
+        console.log("Mostrando grafico ", count);
+        console.log(selectElement.value);
+
+        count++;
+        
+    })
+}
