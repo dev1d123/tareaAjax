@@ -6,10 +6,11 @@ body{
     box-sizing: border-box;
 }
 
-header{
+header {
     background-color: skyblue;
     display: flex;
     justify-content: center;
+    align-items: center;
     text-align: center;
     font-family: "Jaro", sans-serif;
     font-optical-sizing: auto;
@@ -17,6 +18,19 @@ header{
     font-style: normal;
     font-size: 3.5rem;
 }
+header img{
+    border-radius: 3rem;
+}
+
+.title {
+    display: flex;
+    align-items: center; 
+}
+
+.title p {
+    margin-right: 20px; 
+}
+
 
 .info{
     font-family: "Jaro", sans-serif;
@@ -34,15 +48,33 @@ header{
 }
 .gr{
     margin: auto;
+    justify-items: center; 
+    align-items: center; 
 }
 
-.select-option{
+.select-option {
     padding-top: 20rem;
 }
-select{
+
+select {
     font-size: 2rem;
     border-radius: 1.5rem;
+    padding: 1rem;
+    border: 2px solid #ccc; 
+    background-color: #fff; 
+    transition: border-color 0.3s, background-color 0.3s; 
 }
+
+select:hover {
+    border-color: #999; 
+    background-color: #f9f9f9;
+}
+
 .res{
-    
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0; 
 }

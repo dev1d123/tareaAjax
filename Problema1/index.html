@@ -16,31 +16,38 @@
     <div class="info">
         <p>Seleccione las ubicaciones para empezar a comparar</p>
     </div>
-
-    <div class="gr1">
-        <div id="grafico1">
-
+    <div class="graph-container">
+        <div class="gr">
+            <div id="grafico1">
+    
+            </div>
+            <div class="select-option">
+                <select onchange="callGraphic()">
+                    <option selected>Seleccionar departamento</option>    
+                </select>
+            </div>        
         </div>
-        <div class="select-option">
-            <select onchange="callGraphic()">
-                <option selected>Seleccionar departamento</option>    
-            </select>
-        </div>        
+    
+        <div class="gr">
+            <div id="grafico2">
+    
+            </div>
+            <div class="select-option">
+                <select onchange="callGraphic()">
+                    <option selected>Seleccionar departamento</option>    
+                </select>
+            </div>
+        </div>
     </div>
 
-    <div class="gr2">
-        <div id="grafico2">
-
-        </div>
-        <div class="select-option">
-            <select onchange="callGraphic()">
-                <option selected>Seleccionar departamento</option>    
-            </select>
-        </div>
-    </div>
 
     <div class="res">
         <p>Resultados de la comparación</p>
+        <p id = "info-comp">
+            .
+            .
+            .
+        </p>
     </div>
 </body>
 </html>
