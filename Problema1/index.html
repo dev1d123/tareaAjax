@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Problema 1</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
     <header>
@@ -19,7 +21,8 @@
     <div class="graph-container">
         <div class="gr">
             <div id="grafico1">
-    
+                <canvas id="g1" width="300" height="250"></canvas>
+
             </div>
             <div class="select-option departamento">
                 <select onchange="callGraphic()">
@@ -30,7 +33,7 @@
     
         <div class="gr">
             <div id="grafico2">
-    
+                <canvas id="g2" width="300" height="250"></canvas>
             </div>
             <div class="select-option departamento">
                 <select onchange="callGraphic()">
