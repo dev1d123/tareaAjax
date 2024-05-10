@@ -1,102 +1,75 @@
+console.log("funcasdionando");
 
-function loadDep(){
-    console.log("Implementacion de la funcion para cargar todos los")
-    const xhttp = new XMLHttpRequest(); 
-    xhttp.open("GET", "../data.json", true); 
-    xhttp.send(); 
+function loadDep() {
+    console.log("Implementacion de la funcion para cargar todos los");
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "../data.json", true);
+    xhttp.send();
     //manejamos la respuesta
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){ 
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
             console.log("Exito!!!");
-            console.log(this.responseText);
-            let datos = JSON.parse(this.responseText);
-            console.log(datos)
-            //showDep(datos)
+            console.log(xhttp.responseText);
+            let datos = JSON.parse(xhttp.responseText);
+            console.log(datos);
+            showDep(datos);
         }
-    }
+    };
 }
-/*
-function showDep(data){
-    //Iterar en los dos selectores
-    console.log("WOW, he recibido los datos!!");
-    data.forEach(element => {
-        console.log(element.region);
-    });
-    //iteramos para añadir datos en cada uno de los contenedores
-    departamentoSeleccion.forEach(function(selectElement) {
-        //Iterar en cada elemento de data, cada elemento es un objeto con los siguiente atributos: region, confirmed (los demas estan vacios).
-        data.forEach(element => {
-            console.log(element.region);
-            var departamento = document.createElement('option');
-            departamento.textContent = element.region;
-            departamento.value = element.region;
-            selectElement.appendChild(departamento);
-        });
+
+function showDep(data) {
+    // Iterar en todos los datos
+    data.forEach((element, index) => {
+        if(element.region == "Lima" || element.region == "Callao"){
+            return;
+        }
+        createGraphic(element.confirmed, element.region, index + 1); // Pasar los datos confirmados y la región
     });
 }
-window.onload = loadDep; //llamar a la funcion para cargar los departamenos cuando la pagina termine de cargarse
 
+function createGraphic(confirmedData, region, count) {
+    const title = document.createElement('h3'); 
+    title.textContent = region;
+    const canvasContainer = document.createElement('div'); 
+    canvasContainer.classList.add('canvas-container');
+    document.body.appendChild(canvasContainer); 
 
-//funcion para verificar que los dos cuadros esten llenos!!!
-function callGraphic(){
-    console.log("Valores de los selectores");
-    var show = true;
-    departamentoSeleccion.forEach(function(selectElement){
-        console.log(selectElement.value);
-        if(selectElement.value == "no-value"){
-            show = false;
-        }
-    })
-    if(show){
-        console.log("TODO OK -> Imprimiendo graficos");
-        console.log("llamando a show!");
-        showGraphics();
-    }else{
-        console.log("Faltan valores!!!");
-    }
-}
+    const canvas = document.createElement('canvas');
+    canvas.id = 'g' + count; 
+    canvas.width = "400px";
+    canvas.height = "300px"; 
+    canvasContainer.appendChild(canvas); 
 
-function showGraphics(){
-    console.log("Valores de los selectores");
-    var count = 1;
-    departamentoSeleccion.forEach(function(selectElement){
-        console.log("Mostrando grafico ", count);
-        var dep = selectElement.value;
-        getConfirmed(dep);
-        console.log(selectElement.value);
+    const ctx = canvas.getContext('2d');
+    
+    const fechas = confirmedData.map(entry => entry.date);
+    const valores = confirmedData.map(entry => entry.value);
 
-        count++;
-        
-    })
-}
-
-function getConfirmed(dep){
-    const xhttp = new XMLHttpRequest(); 
-    xhttp.open("GET", "../data.json", true); 
-    xhttp.send(); 
-
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){ 
-            console.log("Exito!!!");
-            console.log(this.responseText);
-            let datos = JSON.parse(this.responseText);
-            console.log(datos)
-            var confirmados = getDatos(datos, dep)
-            console.log("Los confirmados son: ", confirmados);
-        }
-    }
-
-}
-
-function getDatos(datos, dep){
-    //iteramos para añadir datos en cada uno de los contenedores
-    departamentoSeleccion.forEach(function(selectElement) {
-        datos.forEach(element => {
-            if(element.region == dep){
-                return element.confirmed; //arreglo de objetos con atributos date y value
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: `Casos confirmados - ${region}`,
+                data: valores,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
             }
-
-        });
+        }
     });
+    canvasContainer.appendChild(title); // Agrega el título al contenedor
+
+
 }
-*/
+
+window.onload = loadDep; // Llamar a la función para cargar los departamentos cuando la página termine de cargarse

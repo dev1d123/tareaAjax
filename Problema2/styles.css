@@ -79,3 +79,13 @@ select:hover {
     position: fixed;
     bottom: 0; 
 }
+.canvas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 20px; /* Espacio entre los elementos */
+}
+
+.canvas-container canvas {
+    width: 30%; 
+    height: 300px; 
+}
